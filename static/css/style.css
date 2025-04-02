@@ -3,16 +3,18 @@ body, html {
     padding: 0;
     height: 100%;
     overflow: hidden;
+    font-family: sans-serif;
   }
   
   .background-image {
     background: url('/static/images/background.jpg') no-repeat center center fixed;
     background-size: cover;
     position: absolute;
-    top: 0;
+    top: 60px; /* Match webcam spacing */
+    bottom: 60px;
     left: 0;
-    height: 100%;
     width: 100%;
+    height: calc(100% - 120px); /* Leaves top & bottom space */
     z-index: 0;
   }
   
@@ -28,4 +30,47 @@ body, html {
     filter: grayscale(100%);
     transform: scaleX(-1); 
   }
+
+  .header {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 2;
+  }
   
+  .header-title {
+    margin: 0 auto;
+    color: #007bff;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .header-right {
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .footer {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    z-index: 2;
+  }
+  
+  .next-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .next-button:hover {
+    background-color: #0056b3;
+  }
