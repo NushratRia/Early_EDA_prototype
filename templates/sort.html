@@ -1,0 +1,371 @@
+<!--DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Webcam Overlay</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-image" style="background-image: url('{{ url_for('static', filename='images/' + background_image) }}');"></div>
+  <video id="webcam" autoplay muted playsinline></video>
+ 
+  <div class="header">
+    <div class="header-left">Multimodal Interactions for EDA</div>
+    <div class="header-center">Task: Sort 'Age'</div>
+    <div class="header-right">
+      <button class="about-button">About</button>
+    </div>
+  </div>
+  
+
+
+  <div class="footer">
+    <button class="next-button">Next</button>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html-->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webcam Overlay</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+    /* 🎨 Color palette */
+    .c1 { color: #db3069; }
+    .c2 { color: #ec8ca6; }
+    .c3 { color: #ffc6a5; }
+    .c4 { color: #fb8500; }
+    .c5 { color: #5ecfb1; }
+    .c6 { color: #1e9dad; }
+    .c7 { color: #0b4f84; }
+    .c8 { color: #649fd6; }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+    }
+
+    html, body {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: url('{{ url_for('static', filename='images/background.jpg') }}') center/cover no-repeat;
+        opacity: 1.0;
+        z-index: -3;
+    }
+
+    #webcam {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.20; /* 👈 reduce webcam visibility */
+        z-index: -2;
+    }
+
+
+    .big-bold {
+        font-size: 1.3rem; /* adjust as needed */
+        font-weight: 700;
+    }
+
+    .header,
+    .footer {
+        position: fixed;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem; /* 👈 reduced height */
+        background-color:rgb(229, 249, 244);
+        color: white;
+        z-index: 10;
+    }
+
+    .header {
+        top: 0;
+        justify-content: space-between;
+    }
+
+    .footer {
+        bottom: 0;
+        justify-content: center;
+        background: rgb(229, 249, 244);
+    }
+
+    .header-left,
+    .header-center,
+    .header-right {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .about-button,
+    .next-button {
+        background-color: #fb8500;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        }
+        
+
+    .about-button:hover,
+    .next-button:hover {
+        background-color: #ffb703;
+    }
+    .correct-button,
+    .incorrect-button {
+    background-color: #fb8500;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin: 0 0.5rem; /* 👈 spacing between buttons */
+    transition: background-color 0.2s ease;
+    }
+
+
+
+    /* 🔽 Reduce max layout width */
+    .header, .footer {
+        max-width: fit;
+        margin: 0 auto;
+    }
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;              /* full width */
+        background:rgb(229, 249, 244);
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        padding: 0.5rem 1rem;      /* small padding all around */
+        box-sizing: border-box;   /* important to include padding inside width */
+        }
+
+    .header-left, .header-center, .header-right {
+        flex: 1;
+        text-align: center;
+    }
+
+    .header-left {
+        text-align: left;
+    }
+
+    .header-right {
+        text-align: right;
+    }
+
+    .correct-button:hover,
+    .incorrect-button:hover {
+    background-color: #ffb703;
+    }
+    .popup-button {
+        padding: 0.5rem 1.2rem;
+        background-color: #1e9dad;
+        border: none;
+        color: white;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    /* Yes / No buttons hover effect */
+    #yes-button:hover,
+    #no-button:hover {
+        background-color: #ffb703; /* A nice teal on hover */
+        transform: scale(1.05);     /* Slight grow effect */
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    #try-again-msg {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #ffb703;
+        max-width: 150px;
+        max-height: 50px;
+    }     
+
+    </style>
+</head>
+<body>
+
+    <div class="background-image"></div>
+    <video id="webcam" autoplay muted playsinline></video>
+
+    <!-- Blur overlay -->
+    <div id="blur-overlay" style="
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 98;
+    "></div>
+
+    <!-- Header Bar -->
+    <div class="header">
+        <div class="eader-left c6 big-bold">Task: Sort Column 'Age'</div>
+        <!--div class="header-center c5">Task: Sort 'Age'</div-->
+        <div class="header-right">
+        <button class="about-button">About</button>
+        </div>
+    </div>
+
+    
+
+    <!-- Footer Bar -->
+    <!--div class="footer">
+        <button class="next-button">Next</button>
+    </div-->
+
+    <div class="footer">
+        <button class="correct-button">Correct</button>
+        <button class="incorrect-button">Incorrect</button>
+    </div>
+
+    <!-- Correct popup -->
+    <div id="correct-popup" style="
+    display: none;
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    z-index: 100;  /* Must be above the blur */
+    text-align: center;
+    ">
+    <p style="margin-bottom: 1rem;">🎉 Correct! Ready to move on?</p>
+    <div style="display: flex; justify-content: center; gap: 1rem;">
+        <button id="yes-button" class="popup-button">Yes</button>
+        <button id="no-button" class="popup-button">No</button>
+    </div>
+    </div>
+
+
+        <!-- Try again message -->
+        <div id="try-again-msg" style="
+        display: none;
+        position: fixed;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background:rgb(0, 0, 0);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-weight: bold;
+        text-align: center;
+        z-index: 100;
+        ">
+        ❌ Try again!
+        </div>
+
+
+
+
+    <!--script src="{{ url_for('static', filename='js/script.js') }}"></script-->
+    <script>
+    const video = document.getElementById('webcam');
+
+    // Request access to webcam
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+        video.srcObject = stream;
+    })
+    .catch((err) => {
+        console.error('Webcam error:', err);
+        alert('Could not access webcam. Please check browser settings and permissions.');
+    });
+
+
+
+
+    
+    const correctBtn = document.querySelector('.correct-button');
+    const incorrectBtn = document.querySelector('.incorrect-button');
+    const popup = document.getElementById('correct-popup');
+    const tryAgainMsg = document.getElementById('try-again-msg');
+    const yesBtn = document.getElementById('yes-button');
+    const noBtn = document.getElementById('no-button');
+
+    const disableAllButtons = () => {
+        document.querySelectorAll('button:not(#yes-button):not(#no-button)').forEach(btn => btn.disabled = true);
+    };
+
+    const enableAllButtons = () => {
+        document.querySelectorAll('button').forEach(btn => btn.disabled = false);
+    };
+
+    correctBtn.addEventListener('click', () => {
+        disableAllButtons();
+        popup.style.display = 'block';
+    });
+
+    incorrectBtn.addEventListener('click', () => {
+        disableAllButtons();
+        tryAgainMsg.style.display = 'block';
+        setTimeout(() => {
+        tryAgainMsg.style.display = 'none';
+        enableAllButtons();
+        }, 2000);
+    });
+
+    yesBtn.addEventListener('click', () => {
+        // TODO: replace with real next navigation logic
+        window.location.href = "/next"; // replace as needed
+    });
+
+    noBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+        enableAllButtons();
+    });
+
+    </script>
+
+</body>
+</html>
