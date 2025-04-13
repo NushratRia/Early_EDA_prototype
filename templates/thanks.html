@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multimodal EDA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background:rgb(253, 241, 233); /*linear-gradient(to right, #ffcf67, #ffc043);  golden background */
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 1;
+      gap: 16px;
+      padding: 24px;
+    }
+
+    .icon-grid i {
+      font-size: 26px;
+      opacity: 0.85;
+      justify-self: center;
+      align-self: center;
+    }
+
+    /* 🎨 Pantone-inspired icon colors */
+    .c1 { color: #db3069; } /* vivid magenta */
+    .c2 { color: #ec8ca6; } /* soft pink */
+    .c3 { color: #ffc6a5; } /* peach fuzz */
+    .c4 { color: #fb8500; } /* orange */
+    .c5 { color: #5ecfb1; } /* mint green */
+    .c6 { color: #1e9dad; } /* teal */
+    .c7 { color: #0b4f84; } /* navy */
+    .c8 { color: #649fd6; } /* blue */
+
+    .landing {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(20px);
+      padding: 50px 30px;
+      border-radius: 200px;
+      text-align: center;
+      z-index: 10;
+      max-width: 620px;
+      border: 0.000000001px solid #023047;
+    }
+
+    .landing h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #023047;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .start-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 36px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      background-color: #fb8500;
+      border: none;
+      border-radius: 40px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      text-decoration: none;
+    }
+
+    .start-button:hover {
+      background-color: #ffb703;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="icon-grid" id="iconGrid"></div>
+
+  <div class="landing">
+    <h1>Thank You for Participating</h1>
+    <!--a href="/task" class="start-button">Let’s Start</a-->
+  </div>
+
+  <script>
+    const icons = [
+      "fa-microphone", "fa-hand-pointer", "fa-sign-language", "fa-computer-mouse",
+      "fa-keyboard", "fa-desktop", "fa-laptop", "fa-volume-up",
+      "fa-pen-nib", "fa-file-lines", "fa-mobile-screen-button", "fa-eye",
+      "fa-magnifying-glass", "fa-camera", "fa-headphones", "fa-comments",
+      "fa-video", "fa-chalkboard", "fa-brain", "fa-lightbulb"
+    ];
+
+    const colorClasses = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
+    const grid = document.getElementById("iconGrid");
+    const total = 96; // 12 x 8 grid
+
+    for (let i = 0; i < total; i++) {
+      const icon = document.createElement("i");
+      const iconName = icons[Math.floor(Math.random() * icons.length)];
+      const colorClass = colorClasses[Math.floor(Math.random() * colorClasses.length)];
+      icon.className = `fas ${iconName} ${colorClass}`;
+      grid.appendChild(icon);
+    }
+  </script>
+</body>
+</html>
