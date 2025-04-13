@@ -53,7 +53,7 @@
     }
 
     #webcam {
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
@@ -227,10 +227,10 @@
 
     <!-- Header Bar -->
     <div class="header">
-        <div class="header-left c7 big-bold">Task: Sort Column 'Employee ID'</div>
+        <div class="header-left c7 big-bold">Task Done: Merge Sheets</div>
         <!--div class="header-center c5">Task: Sort 'Age'</div-->
         <div class="header-right">
-        <!--button class="about-button">About</button-->
+        <a href="{{ url_for('sort') }}" class="next-button">Next</a>
         </div>
     </div>
 
@@ -240,50 +240,6 @@
     <!--div class="footer">
         <button class="next-button">Next</button>
     </div-->
-
-    <div class="footer">
-        <button class="correct-button">Correct</button>
-        <button class="incorrect-button">Incorrect</button>
-    </div>
-
-    <!-- Correct popup -->
-    <div id="correct-popup" style="
-    display: none;
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    z-index: 100;  /* Must be above the blur */
-    text-align: center;
-    ">
-    <p style="margin-bottom: 1rem;">🎉 Correct! Ready to move on?</p>
-    <div style="display: flex; justify-content: center; gap: 1rem;">
-        <button id="yes-button" class="popup-button">Yes</button>
-        <button id="no-button" class="popup-button">No</button>
-    </div>
-    </div>
-
-
-        <!-- Try again message -->
-        <div id="try-again-msg" style="
-        display: none;
-        position: fixed;
-        bottom: 80px;
-        left: 50%;
-        transform: translateX(-50%);
-        background:rgb(0, 0, 0);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 6px;
-        font-weight: bold;
-        text-align: center;
-        z-index: 100;
-        ">
-        ❌ Try again!
-        </div>
 
 
 
@@ -337,7 +293,7 @@
 
     yesBtn.addEventListener('click', () => {
         // TODO: replace with real next navigation logic
-        window.location.href = "/sort2"; // replace as needed
+        window.location.href = "/next"; // replace as needed
     });
 
     noBtn.addEventListener('click', () => {
