@@ -15,7 +15,7 @@ def landing():
 
 @app.route("/task")
 def page2():
-    return render_template("merge.html", background_image="background2.jpg")  # Use your next page's image name here
+    return render_template("merge.html")
 
 @app.route('/merge2')
 def merge2():
@@ -29,6 +29,14 @@ def sort():
 def sort2():
     return render_template('sort2.html') 
 
+@app.route('/ssort')
+def ssort():
+    return render_template('ssort.html')
+ 
+@app.route('/ssort2')
+def ssort2():
+    return render_template('ssort2.html') 
+
 @app.route('/remove')
 def remove():
     return render_template('remove.html') 
@@ -36,6 +44,14 @@ def remove():
 @app.route('/remove2')
 def remove2():
     return render_template('remove2.html') 
+
+@app.route('/rremove')
+def rremove():
+    return render_template('rremove.html') 
+
+@app.route('/rremove2')
+def rremove2():
+    return render_template('rremove2.html') 
 
 @app.route('/missing')
 def missing():
@@ -45,10 +61,18 @@ def missing():
 def missing2():
     return render_template('missing2.html') 
 
+@app.route('/mmissing')
+def mmissing():
+    return render_template('mmissing.html') 
+
+@app.route('/mmissing2')
+def mmissing2():
+    return render_template('mmissing2.html') 
+
 @app.route('/thanks')
 def thanks():
     return render_template('thanks.html') 
 
 if __name__ == "__main__":
     #app.run(debug=True)
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)

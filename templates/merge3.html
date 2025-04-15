@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    /* Color palette */
+    .c1 { color: #db3069; }
+    .c2 { color: #ec8ca6; }
+    .c3 { color: #ffc6a5; }
+    .c4 { color: #fb8500; }
+    .c5 { color: #5ecfb1; }
+    .c6 { color: #1e9dad; }
+    .c7 { color: #0b4f84; }
+    .c8 { color: #649fd6; }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+    }
+
+    html, body {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #webcam {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.20;
+        z-index: -1;
+        transform: scaleX(-1);
+        filter: grayscale(1);
+    }
+
+    .big-bold {
+        font-size: 90px; 
+        font-weight: 900;
+    }
+
+    .header,
+    .footer {
+        position: fixed;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem; 
+        background-color:rgb(229, 249, 235);
+        color: white;
+        z-index: 10;
+    }
+
+    .header {
+        top: 0;
+        justify-content: space-between;
+    }
+
+    .footer {
+        bottom: 0;
+        justify-content: center;
+        background: rgb(229, 249, 235);
+    }
+
+    .header-left,
+    .header-center,
+    .header-right {
+        font-size: 2.2rem;
+        font-weight: 600;
+    }
+
+    .tab-button {
+        background-color: #649fd6;
+        color: white;
+        border: none;
+        padding: 0.3rem 0.8rem;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .tab-button:hover {
+        background-color: #ffb703;
+    }
+
+    .active-tab {
+        background-color: #1e9dad !important;
+    }
+
+    .header, .footer {
+        max-width: fit;
+        margin: 0 auto;
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background:rgb(229, 249, 244);
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+        box-sizing: border-box;
+        gap: 1rem;
+    }
+
+    .header-left, .header-center, .header-right {
+        flex: 1;
+        text-align: center;
+    }
+
+    .header-left {
+        text-align: left;
+    }
+
+    .header-right {
+        text-align: right;
+    }
+
+    .correct-button,
+    .incorrect-button {
+        background-color: #fb8500;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        color: white;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .correct-button:hover,
+    .incorrect-button:hover {
+        background-color: #ffb703;
+    }
+    a.correct-button {
+        text-decoration: none;
+    }
+
+    #try-again-msg {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: black;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        color:rgb(255, 7, 3);
+    }
+
+    table {
+        padding: 10px;
+        padding-top: 20px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid black;
+    }
+
+    thead tr {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 2;
+    }
+</style>
+</head>
+<body>
+
+<div class="background-image"></div>
+<video id="webcam" autoplay muted playsinline></video>
+
+<div id="blur-overlay" style="
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 98;">
+</div>
+
+<div class="header">
+    <div class="header-left c7 big-bold">Task (1/5): Merge Sheets</div>
+</div>
+<h2>Merged Table</h2>
+    <h2>Merged Table</h2>
+    <p></p>
+    <p></p>
+
+<!-- Button Group for Sheet Tabs -->
+<div style="
+    position: fixed;
+    bottom: 55px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 1.5rem;
+    gap: 1rem;
+    z-index: 15;
+">
+    <button class="tab-button active-tab" onclick="showSheet('sheet1-table', this)">Sheet1</button>
+    <button class="tab-button" onclick="showSheet('sheet2-table', this)">Sheet2</button>
+</div>
+
+<!-- Tables Container -->
+<div style="overflow-y: scroll; display: block; height: 700px;">
+    <!-- Sheet 1 -->
+    <div id="sheet1-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial</th>
+                    <th>Employee_ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Department</th>
+                    <th>Skills</th>
+                    <th>Years_at_Company</th>
+                    <th>Salary</th>
+                    <th>Feedback</th>
+                    <th>Manager</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>101</td><td>Aisha Khan</td><td>29</td><td>HR</td><td>Excel; Communication</td><td>3</td><td>55000</td><td>I love working here!</td><td>Samuel Okoro</td></tr>
+                <tr><td>2</td><td>109</td><td>Noor Al-Fulan</td><td>57</td><td>Engineering</td><td>Excel; Python</td><td>23</td><td>97830</td><td>Needs more team activities.</td><td>Isabella Rossi</td></tr>
+                <tr><td>3</td><td>110</td><td>Carlos da Silva</td><td></td><td>HR</td><td>C++; UX Design</td><td></td><td></td><td>Could use more diversity initiatives.</td><td>Samuel Okoro</td></tr>
+                <tr><td>4</td><td>111</td><td>Min-Jae Park</td><td></td><td>Marketing</td><td>Excel; UX Design</td><td>13</td><td>86125</td><td>Enjoying the new projects.</td><td>Leila Haddad</td></tr>
+                <tr><td>5</td><td>102</td><td>Luis Martínez</td><td></td><td>Sales</td><td>Excel, Sales</td><td>1</td><td></td><td>Great culture but needs better benefits.</td><td>Isabella Rossi</td></tr>
+                <tr><td>6</td><td>106</td><td>Tomáš Novák</td><td>39</td><td></td><td>Excel;Communication; Sales</td><td></td><td>125000</td><td>Benefits? Not bad.</td><td>David Kim</td></tr>
+                <tr><td>7</td><td>107</td><td>Ayaka Tanaka</td><td>62</td><td>HR</td><td>Excel;Management</td><td>30</td><td>300000</td><td>Considering retirement soon.</td><td>Samuel Okoro</td></tr>
+                <tr><td>8</td><td>108</td><td>Jamal Robinson</td><td>31</td><td>Product</td><td>UX Design, HTML</td><td>4</td><td>99000</td><td>Tools could be better.</td><td>Leila Haddad</td></tr>
+                <tr><td>9</td><td>112</td><td>Sara Müller</td><td></td><td>Product</td><td>Excel; Machine Learning</td><td></td><td></td><td>Better equipment would help.</td><td>David Kim</td></tr>
+                <tr><td>10</td><td>113</td><td>Alioune Ba</td><td>34</td><td>Sales</td><td>Machine Learning; C++</td><td>29</td><td></td><td>Looking forward to a raise.</td><td>Leila Haddad</td></tr>
+                <tr><td>11</td><td>114</td><td>Yuki Nakamura</td><td>43</td><td>Sales</td><td>Sales; Communication</td><td>15</td><td>108125</td><td>Enjoying the new projects.</td><td>Samuel Okoro</td></tr>
+                <tr><td>12</td><td>115</td><td>Omar El-Sayed</td><td></td><td>Sales</td><td>Management; Communication</td><td>15</td><td></td><td>Enjoying the new projects.</td><td>Isabella Rossi</td></tr>
+                <tr><td>13</td><td>116</td><td>Natalie Petrov</td><td></td><td></td><td>Communication; HTML</td><td></td><td></td><td>Looking forward to a raise.</td><td>Leila Haddad</td></tr>
+                <tr><td>14</td><td>117</td><td>Kwame Mensah</td><td>40</td><td>Product</td><td>Machine Learning; Sales; Excel</td><td>10</td><td></td><td>I want more flexible hours.</td><td>David Kim</td></tr>
+                <tr><td>15</td><td>118</td><td>Lucía Fernández</td><td></td><td>Engineering</td><td>UX Design; Communication; Excel</td><td>17</td><td></td><td>Better equipment would help.</td><td>Samuel Okoro</td></tr>
+                <tr><td>16</td><td>119</td><td>Ahmed Rahimi</td><td>37</td><td>Sales</td><td>UX Design; Excel</td><td></td><td></td><td>Enjoying the new projects.</td><td>Isabella Rossi</td></tr>
+                <tr><td>17</td><td>103</td><td>Wei Chen</td><td>45</td><td>SALES</td><td>Sales;Negotiation</td><td>10</td><td>110000</td><td>Workload is high.</td><td>Samuel Okoro</td></tr>
+                <tr><td>18</td><td>104</td><td>Ananya Iyer</td><td>34</td><td>Engineering</td><td>Python, C++</td><td>5</td><td>95000</td><td>Happy, but would love a promotion.</td><td>Leila Haddad</td></tr>
+                <tr><td>19</td><td>105</td><td>Fatima Diallo</td><td>28</td><td>engineering</td><td>Python; Machine Learning</td><td>3</td><td>87000</td><td>Feels stagnant, needs growth.</td><td>Leila Haddad</td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>-</td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>-</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Sheet 2 -->
+    <div id="sheet2-table" style="display: none;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial</th>
+                    <th>Employee_ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Department</th>
+                    <th>Skills</th>
+                    <th>Years_at_Company</th>
+                    <th>Salary</th>
+                    <th>Feedback</th>
+                    <th>Manager</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>120</td><td>Zara Williams</td><td>25</td><td>Management</td><td>Machine Learning</td><td></td><td></td><td>Looking forward to a raise.</td><td>Leila Haddad</td></tr>
+                <tr><td>2</td><td>121</td><td>Mei Lin</td><td></td><td>Marketing</td><td>Python; C++</td><td></td><td></td><td>Love the work-life balance.</td><td>David Kim</td></tr>
+                <tr><td>3</td><td>122</td><td>Ivan Horvat</td><td>33</td><td>Marketing</td><td>HTML; Machine Learning</td><td></td><td>68272</td><td>Better equipment would help.</td><td>Samuel Okoro</td></tr>
+                <tr><td>4</td><td>123</td><td>Thandwie Ndlovu</td><td>45</td><td>Engineering</td><td>Excel; Communication; Python</td><td></td><td></td><td>Could use more diversity initiatives.</td><td>Leila Haddad</td></tr>
+                <tr><td>5</td><td>124</td><td>Liam O'Connor</td><td>32</td><td>Sales</td><td>Machine Learning; Excel; UX Design</td><td></td><td></td><td>I want more flexible hours.</td><td>Samuel Okoro</td></tr>
+                <tr><td>6</td><td>125</td><td>Amina Yusuf</td><td></td><td>Engineering</td><td>HTML; Python</td><td>25</td><td></td><td>Looking forward to a raise.</td><td>Isabella Rossi</td></tr>
+                <tr><td>7</td><td>126</td><td>Hugo Dubois</td><td>41</td><td></td><td>C++; Sales; Communication</td><td></td><td></td><td>Could use more diversity initiatives.</td><td>David Kim</td></tr>
+                <tr><td>8</td><td>127</td><td>Sofia Petrova</td><td>27</td><td>Sales</td><td>HTML; Machine Learning</td><td></td><td></td><td>Love the work-life balance.</td><td>Leila Haddad</td></tr>
+                <tr><td>9</td><td>128</td><td>Mohamed Farah</td><td>47</td><td>Sales</td><td>Communication; HTML</td><td>12</td><td>99514</td><td>Enjoying the new projects.</td><td>Samuel Okoro</td></tr>
+                <tr><td>10</td><td>129</td><td>Chinaza Okeke</td><td>50</td><td>Marketing</td><td>HTML; Communication; Management</td><td>27</td><td>115485</td><td>Love the work-life balance.</td><td>David Kim</td></tr>
+                <tr><td>11</td><td>130</td><td>Ismail Tan</td><td>55</td><td>Product</td><td>HTML; Communication; Python</td><td>19</td><td></td><td>I want more flexible hours.</td><td>Leila Haddad</td></tr>
+                <tr><td>12</td><td>131</td><td>Nina Kowalski</td><td></td><td>Product</td><td>HTML; Sales</td><td></td><td>71260</td><td>Enjoying the new projects.</td><td>Isabella Rossi</td></tr>
+                <tr><td>13</td><td>132</td><td>Pedro Alvarez</td><td>31</td><td>Sales</td><td>C++; Sales; UX Design</td><td></td><td></td><td>Too many meetings.</td><td>Samuel Okoro</td></tr>
+                <tr><td>14</td><td>133</td><td>Layla Chen</td><td>59</td><td>Sales</td><td>C++; Sales</td><td></td><td></td><td>Looking forward to a raise.</td><td>David Kim</td></tr>
+                <tr><td>15</td><td>134</td><td>Raj Patel</td><td>51</td><td>Marketing</td><td>Excel; Communication</td><td>6</td><td></td><td>Great place to grow.</td><td>Leila Haddad</td></tr>
+                <tr><td>16</td><td>135</td><td>Anastasia Ivanova</td><td></td><td>Engineering</td><td>Machine Learning; Communication; Python</td><td></td><td>101967</td><td>Needs more team activities.</td><td>Samuel Okoro</td></tr>
+                <tr><td>17</td><td>136</td><td>Mohammed Al-Tamimi</td><td></td><td>Marketing</td><td>HTML; UX Design</td><td>17</td><td>121989</td><td>I want more flexible hours.</td><td>David Kim</td></tr>
+                <tr><td>18</td><td>137</td><td>Helena Schmidt</td><td>45</td><td>Sales</td><td>Excel; Communication</td><td>22</td><td></td><td>I want more flexible hours.</td><td>Isabella Rossi</td></tr>
+                <tr><td>19</td><td>138</td><td>Jason Lee</td><td></td><td>Sales</td><td>Sales; Communication</td><td>9</td><td></td><td>Great place to grow.</td><td>Leila Haddad</td></tr>
+                <tr><td>20</td><td>118</td><td>Lucía Fernández</td><td></td><td>Engineering</td><td>UX Design; Communication; Excel</td><td>17</td><td></td><td>Better equipment would help.</td><td>Samuel Okoro</td></tr>
+                <tr><td>21</td><td>123</td><td>Thandwie Ndlovu</td><td>45</td><td>Engineering</td><td>Excel; Communication; Python</td><td></td><td></td><td>Could use more diversity initiatives.</td><td>Leila Haddad</td></tr>
+                <tr><td>22</td><td>117</td><td>Kwame Mensah</td><td>40</td><td>Product</td><td>Machine Learning; Sales; Excel</td><td>10</td><td></td><td>I want more flexible hours.</td><td>David Kim</td></tr>
+                <tr><td>23</td><td>101</td><td>Aisha Khan</td><td>29</td><td>HR</td><td>Excel; Communication</td><td>3</td><td>55000</td><td>I love working here!</td><td>Samuel Okoro</td></tr>
+                <tr><td>24</td><td>114</td><td>Yuki Nakamura</td><td>43</td><td>Sales</td><td>Sales; Communication</td><td>15</td><td>108125</td><td>Enjoying the new projects.</td><td>Samuel Okoro</td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>-</td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>-</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Try Again Popup -->
+<div id="try-again-msg">❌ Try again!</div>
+
+<!-- Footer buttons -->
+<div class="footer">
+    <a href="{{ url_for('merge2')}}" class="correct-button">Correct</a>
+    <button class="incorrect-button" onclick="showTryAgain()">Incorrect</button>
+</div>
+
+<!-- Script -->
+<script>
+    const video = document.getElementById('webcam');
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+        video.srcObject = stream;
+    })
+    .catch((err) => {
+        console.error('Webcam error:', err);
+        alert('Could not access webcam. Please check browser settings and permissions.');
+    });
+    
+    function showSheet(sheetId, btn) {
+        document.querySelectorAll('#sheet1-table, #sheet2-table').forEach(el => {
+            el.style.display = 'none';
+        });
+        document.getElementById(sheetId).style.display = 'block';
+    
+        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active-tab'));
+        btn.classList.add('active-tab');
+    }
+    
+    function showTryAgain() {
+        const msg = document.getElementById("try-again-msg");
+        msg.style.display = "block";
+        setTimeout(() => {
+            msg.style.display = "none";
+        }, 2000);
+    }
+    </script>
+
+</body>
+</html>
