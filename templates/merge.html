@@ -372,18 +372,15 @@
         window.location.href = "{{ url_for('merge2') }}";  // This works correctly in Flask
     }
 
-    const video = document.getElementById('webcam');
-    const slider = document.getElementById('brightness-slider');
+    const brightnessSlider = document.getElementById('brightness-slider');
+    const storedBrightness = localStorage.getItem('webcamBrightness');
 
-    // Restore saved brightness from localStorage
-    const savedBrightness = localStorage.getItem('webcamBrightness');
-    if (savedBrightness) {
-        slider.value = savedBrightness;
-        video.style.filter = `brightness(${savedBrightness}) grayscale(1)`;
+    if (storedBrightness) {
+        brightnessSlider.value = storedBrightness;
+        video.style.filter = `brightness(${storedBrightness}) grayscale(1)`;
     }
 
-    // Update filter and save new brightness when slider is used
-    slider.addEventListener('input', function () {
+    brightnessSlider.addEventListener('input', function () {
         const brightness = this.value;
         video.style.filter = `brightness(${brightness}) grayscale(1)`;
         localStorage.setItem('webcamBrightness', brightness);
