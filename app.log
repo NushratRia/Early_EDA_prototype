@@ -18,3 +18,50 @@
 2025-04-30 00:44:22,054 INFO: 127.0.0.1 - - [30/Apr/2025 00:44:22] "GET /task HTTP/1.1" 200 -
 2025-04-30 00:44:23,358 INFO: 127.0.0.1 - - [30/Apr/2025 00:44:23] "GET /task HTTP/1.1" 200 -
 2025-04-30 00:45:56,742 INFO: 127.0.0.1 - - [30/Apr/2025 00:45:56] "GET /task HTTP/1.1" 200 -
+2025-04-30 00:48:23,038 INFO: 127.0.0.1 - - [30/Apr/2025 00:48:23] "GET /merge2 HTTP/1.1" 200 -
+2025-04-30 00:55:49,929 INFO: 127.0.0.1 - - [30/Apr/2025 00:55:49] "GET /task HTTP/1.1" 200 -
+2025-04-30 00:55:56,455 INFO: 127.0.0.1 - - [30/Apr/2025 00:55:56] "GET /merge2 HTTP/1.1" 200 -
+2025-04-30 00:56:04,750 INFO: 127.0.0.1 - - [30/Apr/2025 00:56:04] "GET /merge2 HTTP/1.1" 200 -
+2025-04-30 00:56:22,740 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.0.81:5001
+2025-04-30 00:56:22,740 INFO: [33mPress CTRL+C to quit[0m
+2025-04-30 00:56:22,747 INFO:  * Restarting with watchdog (fsevents)
+2025-04-30 00:56:23,258 WARNING:  * Debugger is active!
+2025-04-30 00:56:23,266 INFO:  * Debugger PIN: 267-471-878
+2025-04-30 00:56:26,549 INFO: 127.0.0.1 - - [30/Apr/2025 00:56:26] "GET /merge2 HTTP/1.1" 200 -
+2025-04-30 00:59:40,414 INFO: 127.0.0.1 - - [30/Apr/2025 00:59:40] "GET /merge2 HTTP/1.1" 200 -
+2025-04-30 01:01:19,724 INFO: 127.0.0.1 - - [30/Apr/2025 01:01:19] "GET /merge2 HTTP/1.1" 200 -
+2025-04-30 01:01:22,046 INFO: 127.0.0.1 - - [30/Apr/2025 01:01:22] "GET /ssort HTTP/1.1" 200 -
+2025-04-30 01:01:27,245 INFO: 127.0.0.1 - - [30/Apr/2025 01:01:27] "GET /ssort2 HTTP/1.1" 200 -
+2025-04-30 01:01:28,575 INFO: 127.0.0.1 - - [30/Apr/2025 01:01:28] "GET /rremove HTTP/1.1" 200 -
+2025-04-30 01:01:31,206 INFO: 127.0.0.1 - - [30/Apr/2025 01:01:31] "GET /rremove2 HTTP/1.1" 200 -
+2025-04-30 01:02:32,360 INFO: 127.0.0.1 - - [30/Apr/2025 01:02:32] "GET /rremove2 HTTP/1.1" 200 -
+2025-04-30 01:02:41,933 INFO: 127.0.0.1 - - [30/Apr/2025 01:02:41] "GET /task HTTP/1.1" 200 -
+2025-04-30 01:02:46,852 INFO: 127.0.0.1 - - [30/Apr/2025 01:02:46] "GET /merge2 HTTP/1.1" 200 -
+2025-04-30 01:02:48,457 INFO: 127.0.0.1 - - [30/Apr/2025 01:02:48] "GET /ssort HTTP/1.1" 200 -
+2025-04-30 01:02:50,340 INFO: 127.0.0.1 - - [30/Apr/2025 01:02:50] "GET /ssort2 HTTP/1.1" 200 -
+2025-04-30 01:02:53,177 INFO: 127.0.0.1 - - [30/Apr/2025 01:02:53] "GET /rremove HTTP/1.1" 200 -
+2025-04-30 01:02:54,803 INFO: 127.0.0.1 - - [30/Apr/2025 01:02:54] "GET /rremove2 HTTP/1.1" 200 -
+2025-04-30 01:02:56,040 INFO: 127.0.0.1 - - [30/Apr/2025 01:02:56] "GET /mmissing HTTP/1.1" 200 -
+2025-04-30 01:02:57,337 INFO: 127.0.0.1 - - [30/Apr/2025 01:02:57] "GET /mmissing2 HTTP/1.1" 200 -
+2025-04-30 01:03:04,571 INFO: 127.0.0.1 - - [30/Apr/2025 01:03:04] "GET /thanks HTTP/1.1" 200 -
+2025-04-30 01:06:21,042 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.0.81:5001
+2025-04-30 01:06:21,042 INFO: [33mPress CTRL+C to quit[0m
+2025-04-30 01:06:21,049 INFO:  * Restarting with watchdog (fsevents)
+2025-04-30 01:06:21,524 WARNING:  * Debugger is active!
+2025-04-30 01:06:21,533 INFO:  * Debugger PIN: 267-471-878
+2025-04-30 01:06:27,872 INFO: 127.0.0.1 - - [30/Apr/2025 01:06:27] "GET / HTTP/1.1" 200 -
+2025-04-30 01:06:29,537 INFO: 127.0.0.1 - - [30/Apr/2025 01:06:29] "GET /task HTTP/1.1" 200 -
+2025-04-30 01:06:35,278 INFO: 127.0.0.1 - - [30/Apr/2025 01:06:35] "GET /merge2 HTTP/1.1" 200 -
+2025-04-30 01:06:37,143 INFO: 127.0.0.1 - - [30/Apr/2025 01:06:37] "GET /ssort HTTP/1.1" 200 -
+2025-04-30 01:06:38,241 INFO: 127.0.0.1 - - [30/Apr/2025 01:06:38] "GET /ssort2 HTTP/1.1" 200 -
+2025-04-30 01:06:39,239 INFO: 127.0.0.1 - - [30/Apr/2025 01:06:39] "GET /rremove HTTP/1.1" 200 -
+2025-04-30 01:06:40,412 INFO: 127.0.0.1 - - [30/Apr/2025 01:06:40] "GET /rremove2 HTTP/1.1" 200 -
+2025-04-30 01:06:41,711 INFO: 127.0.0.1 - - [30/Apr/2025 01:06:41] "GET /mmissing HTTP/1.1" 200 -
+2025-04-30 01:06:43,896 INFO: 127.0.0.1 - - [30/Apr/2025 01:06:43] "GET /mmissing2 HTTP/1.1" 200 -
+2025-04-30 01:06:45,311 INFO: 127.0.0.1 - - [30/Apr/2025 01:06:45] "GET /thanks HTTP/1.1" 200 -
