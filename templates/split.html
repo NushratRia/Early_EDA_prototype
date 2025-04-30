@@ -337,6 +337,21 @@
         window.location.href = "{{ url_for('mmissing2') }}";  // This works correctly in Flask
     }
 
+    const brightnessSlider = document.getElementById('brightness-slider');
+    const storedBrightness = localStorage.getItem('webcamBrightness');
+
+    if (storedBrightness) {
+        brightnessSlider.value = storedBrightness;
+        video.style.filter = `brightness(${storedBrightness}) grayscale(1)`;
+    }
+
+    brightnessSlider.addEventListener('input', function () {
+        const brightness = this.value;
+        video.style.filter = `brightness(${brightness}) grayscale(1)`;
+        localStorage.setItem('webcamBrightness', brightness);
+    });
+
+
 
 
 
