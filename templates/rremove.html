@@ -337,9 +337,20 @@
         }, 2000);
     }
 
+    let clickCount = 0;
+
     function goTo2() {
-        window.location.href = "{{ url_for('rremove2') }}";  // This works correctly in Flask
+        clickCount++;
+        if (clickCount < 3) {
+            showTryAgain();
+        } else {
+            window.location.href = "{{ url_for('rremove2') }}";
+        }
     }
+
+    //function goTo2() {
+        //window.location.href = "{{ url_for('rremove2') }}";  // This works correctly in Flask
+    //}
 
     const brightnessSlider = document.getElementById('brightness-slider');
     const storedBrightness = localStorage.getItem('webcamBrightness');
