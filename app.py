@@ -1,6 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
+from fingertip_test import FingertipTracker
+import logging
+
+# Configure logging to write to app.log
+logging.basicConfig(filename='app.log', level=logging.INFO, 
+                    format='%(asctime)s %(levelname)s: %(message)s')
+
+# Optional: short reference to the logger
+logger = logging.getLogger()
 
 app = Flask(__name__)
+tracker = FingertipTracker()
+tracker.start() 
 
 # @app.route("/")
 # def index():
@@ -9,9 +20,11 @@ app = Flask(__name__)
 @app.route("/")
 def landing():
     return render_template("index.html")
-# @app.route("/")
-# def index():
-#     return render_template("index.html", background_image="background.jpg")
+
+
+@app.route("/fingertips")
+def get_fingertips():
+    return {"fingertips": tracker.fingertips}
 
 @app.route("/task")
 def page2():
