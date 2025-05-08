@@ -396,11 +396,13 @@
         if (results.multiHandLandmarks) {
             for (const landmarks of results.multiHandLandmarks) {
             drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
-                color: '#00FF00', lineWidth: 1
+                color: '#749bf9', lineWidth: 1
             });
             drawLandmarks(canvasCtx, landmarks, {
-                color: '#FF0000',
+                color: (data) => [4, 8, 12, 16, 20].includes(data.index) ? '#ac115f' : 'rgba(255,255,255,0)', // maroon
                 radius: (data) => [4, 8, 12, 16, 20].includes(data.index) ? 1.5 : 0.2
+                //color: '#FF0000',
+                //radius: (data) => [4, 8, 12, 16, 20].includes(data.index) ? 1.5 : 0.2
             });
             }
         }
