@@ -82,6 +82,14 @@ def mmissing():
 def mmissing2():
     return render_template('mmissing2.html') 
 
+@app.route('/split')
+def split():
+    return render_template('split.html') 
+
+@app.route('/split2')
+def split2():
+    return render_template('split2.html') 
+
 @app.route('/thanks')
 def thanks():
     return render_template('thanks.html') 

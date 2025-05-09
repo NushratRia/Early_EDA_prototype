@@ -228,7 +228,7 @@
 </div>
 
 <div class="header">
-    <div class="header-left c7 big-bold">Task (4/5): Handle Missing Values</div>
+    <div class="header-left c7 big-bold">Task (4/4): Split Multi Value Cells</div>
     <div style="position: absolute; right: 1rem; display: flex; align-items: center; gap: 0.5rem;">
         <span style="font-size: 1.2rem;">🔆</span>
         <input type="range" min="0.1" max="1" step="0.01" value="0.2"
@@ -257,13 +257,13 @@
                     <th>Manager</th>
                 </tr>
             </thead>
-            <tr><td>1</td><td>101</td><td>Aisha Khan</td><td>29</td><td>HR</td><td>Excel; Communication</td><td>3</td><td>55000</td><td>I love working here!</td><td>Samuel Okoro</td></tr>
+            <tr><td>1</td><td>101, 138</td><td>Aisha Khan, Jason Lee</td><td>29</td><td>HR</td><td>Excel; Communication</td><td>3</td><td>55000</td><td>I love working here! Great place to grow.</td><td>Samuel Okoro</td></tr>
             <tr><td>2</td><td>102</td><td>Luis Martínez</td><td></td><td>Sales</td><td>Excel, Sales</td><td>1</td><td></td><td>Great culture but needs better benefits.</td><td>Isabella Rossi</td></tr>
             <tr><td>3</td><td>103</td><td>Wei Chen</td><td>45</td><td>SALES</td><td>Sales; Negotiation</td><td>10</td><td>110000</td><td>Workload is high.</td><td>Samuel Okoro</td></tr>
             <tr><td>4</td><td>104</td><td>Ananya Iyer</td><td>34</td><td>Engineering</td><td>Python, C++</td><td>5</td><td>95000</td><td>Happy, but would love a promotion.</td><td>Leila Haddad</td></tr>
             <tr><td>5</td><td>105</td><td>Fatima Diallo</td><td>28</td><td>engineering</td><td>Python; Machine Learning</td><td>3</td><td>87000</td><td>Feels stagnant, needs growth.</td><td>Leila Haddad</td></tr>
             <tr><td>6</td><td>106</td><td>Tomáš Novák</td><td>39</td><td></td><td>Excel; Communication; Sales</td><td></td><td>125000</td><td>Benefits? Not bad.</td><td>David Kim</td></tr>
-            <tr><td>7</td><td>107</td><td>Ayaka Tanaka</td><td>62</td><td>HR</td><td>Excel; Management</td><td>30</td><td>300000</td><td>Considering retirement soon.</td><td>Samuel Okoro</td></tr>
+            <tr><td>7</td><td>107, 137</td><td>Ayaka Tanaka, Helena Schmidt</td><td>62</td><td>HR</td><td>Excel; Management</td><td>30</td><td>300000</td><td>Considering retirement soon. I want more flexible hours.</td><td>Samuel Okoro</td></tr>
             <tr><td>8</td><td>108</td><td>Jamal Robinson</td><td>31</td><td>Product</td><td>UX Design, HTML</td><td>4</td><td>99000</td><td>Tools could be better.</td><td>Leila Haddad</td></tr>
             <tr><td>9</td><td>109</td><td>Noor Al-Fulan</td><td>57</td><td>Engineering</td><td>Excel; Python</td><td>23</td><td>97830</td><td>Needs more team activities.</td><td>Isabella Rossi</td></tr>
             <tr><td>10</td><td>110</td><td>Carlos da Silva</td><td></td><td>HR</td><td>C++; UX Design</td><td></td><td></td><td>Could use more diversity initiatives.</td><td>Samuel Okoro</td></tr>
@@ -293,8 +293,6 @@
             <tr><td>34</td><td>134</td><td>Raj Patel</td><td>51</td><td>Marketing</td><td>Excel; Communication</td><td>6</td><td></td><td>Great place to grow.</td><td>Leila Haddad</td></tr>
             <tr><td>35</td><td>135</td><td>Anastasia Ivanova</td><td></td><td>Engineering</td><td>Machine Learning; Communication; Python</td><td></td><td>101967</td><td>Needs more team activities.</td><td>Samuel Okoro</td></tr>
             <tr><td>36</td><td>136</td><td>Mohammed Al-Tamimi</td><td></td><td>Marketing</td><td>HTML; UX Design</td><td>17</td><td>121989</td><td>I want more flexible hours.</td><td>David Kim</td></tr>
-            <tr><td>37</td><td>137</td><td>Helena Schmidt</td><td>45</td><td>Sales</td><td>Excel; Communication</td><td>22</td><td></td><td>I want more flexible hours.</td><td>Isabella Rossi</td></tr>
-            <tr><td>38</td><td>138</td><td>Jason Lee</td><td></td><td>Sales</td><td>Sales; Communication</td><td>9</td><td></td><td>Great place to grow.</td><td>Leila Haddad</td></tr>
             <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>-</td></tr>
             <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>-</td></tr>
             <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>-</td></tr>
@@ -308,8 +306,8 @@
 
 <!-- Footer buttons -->
 <div class="footer">
-    <button class="correct-button" onclick="goTo2()">Correct</button>
-    <button class="incorrect-button" onclick="showTryAgain()">Incorrect</button>
+    <button class="correct-button" onclick="goTo2()">Next</button>
+    <!--button class="incorrect-button" onclick="showTryAgain()">Incorrect</button-->
 </div>
 
 <!-- Script -->
@@ -334,7 +332,7 @@
     }
 
     function goTo2() {
-        window.location.href = "{{ url_for('mmissing2') }}";  // This works correctly in Flask
+        window.location.href = "{{ url_for('split2') }}";  // This works correctly in Flask
     }
 
     const brightnessSlider = document.getElementById('brightness-slider');
@@ -350,7 +348,6 @@
         video.style.filter = `brightness(${brightness}) grayscale(1)`;
         localStorage.setItem('webcamBrightness', brightness);
     });
-
 
 
 
@@ -417,6 +414,7 @@
         height: 480
     });
     camera.start();
+
     
 </script>
 
