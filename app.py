@@ -34,21 +34,21 @@ def page2():
 def merge2():
     return render_template('merge2.html') 
 
-@app.route('/sort')
-def sort():
-    return render_template('sort.html') 
+@app.route('/missing')
+def missing():
+    return render_template('missing.html') 
 
-@app.route('/sort2')
-def sort2():
-    return render_template('sort2.html') 
+@app.route('/missing2')
+def missing2():
+    return render_template('missing2.html') 
 
-@app.route('/ssort')
-def ssort():
-    return render_template('ssort.html')
- 
-@app.route('/ssort2')
-def ssort2():
-    return render_template('ssort2.html') 
+@app.route('/mmissing')
+def mmissing():
+    return render_template('mmissing.html') 
+
+@app.route('/mmissing2')
+def mmissing2():
+    return render_template('mmissing2.html')
 
 @app.route('/remove')
 def remove():
@@ -64,23 +64,7 @@ def rremove():
 
 @app.route('/rremove2')
 def rremove2():
-    return render_template('rremove2.html') 
-
-@app.route('/missing')
-def missing():
-    return render_template('missing.html') 
-
-@app.route('/missing2')
-def missing2():
-    return render_template('missing2.html') 
-
-@app.route('/mmissing')
-def mmissing():
-    return render_template('mmissing.html') 
-
-@app.route('/mmissing2')
-def mmissing2():
-    return render_template('mmissing2.html') 
+    return render_template('rremove2.html')
 
 @app.route('/split')
 def split():
@@ -88,7 +72,79 @@ def split():
 
 @app.route('/split2')
 def split2():
-    return render_template('split2.html') 
+    return render_template('split2.html')
+
+@app.route('/standard')
+def standard():
+    return render_template('5_standard.html') 
+
+@app.route('/standard2')
+def standard2():
+    return render_template('5_standard2.html') 
+
+@app.route('/sort')
+def sort():
+    return render_template('sort.html') 
+
+@app.route('/sort2')
+def sort2():
+    return render_template('sort2.html') 
+
+@app.route('/ssort')
+def ssort():
+    return render_template('ssort.html')
+ 
+@app.route('/ssort2')
+def ssort2():
+    return render_template('ssort2.html')
+
+@app.route('/map')
+def map():
+    return render_template('7_map.html') 
+
+@app.route('/map2')
+def map2():
+    return render_template('7_map2.html')
+
+@app.route('/open')
+def open():
+    return render_template('8_open.html')
+
+@app.route('/open2')
+def open2():
+    return render_template('8_open2.html')
+
+@app.route('/outlier')
+def outlier():
+    return render_template('9_outlier.html')
+
+@app.route('/outlier2')
+def outlier2():
+    return render_template('9_outlier2.html')
+
+@app.route('/top')
+def top():
+    return render_template('10_top.html')
+
+@app.route('/top2')
+def top2():
+    return render_template('10_top2.html')
+
+@app.route('/pivot')
+def pivot():
+    return render_template('11_pivot.html')
+
+@app.route('/pivot2')
+def pivot2():
+    return render_template('11_pivot2.html')
+
+@app.route('/vis')
+def vis():
+    return render_template('12_vis.html')
+
+@app.route('/vis2')
+def vis2():
+    return render_template('12_vis2.html')
 
 @app.route('/thanks')
 def thanks():
