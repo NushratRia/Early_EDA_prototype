@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- MediaPipe Hands + TF.js -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<style>
+    /* Color palette */
+    .c1 { color: #db3069; }
+    .c2 { color: #ec8ca6; }
+    .c3 { color: #ffc6a5; }
+    .c4 { color: #fb8500; }
+    .c5 { color: #5ecfb1; }
+    .c6 { color: #1e9dad; }
+    .c7 { color: #0b4f84; }
+    .c8 { color: #649fd6; }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+    }
+
+    html, body {
+        height: 100%;
+        overflow: hidden;
+    }
+    #webcam {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.20;
+        z-index: -1;
+        /*filter: brightness(0.9);*/
+        transform: scaleX(-1);
+        filter: grayscale(1);
+    }
+
+
+    .big-bold {
+        font-size: 90px; 
+        font-weight: 900;
+    }
+
+    .header,
+    .footer {
+        position: fixed;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem; 
+        background-color:rgb(94, 207, 177);
+        color: white;
+        z-index: 10;
+    }
+
+    .header {
+        top: 0;
+        justify-content: space-between;
+    }
+
+    .footer {
+        bottom: 0;
+        justify-content: center;
+        background: rgb(94, 207, 177);
+    }
+
+    .header-left,
+    .header-center,
+    .header-right {
+        font-size: 2.2rem;
+        font-weight: 600;
+    }
+
+    .about-button,
+    .next-button {
+        background-color: #fb8500;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        }
+        
+
+    .about-button:hover,
+    .next-button:hover {
+        background-color: #ffb703;
+    }
+    
+    a.next-button {
+        text-decoration: none;
+    }
+
+    .tab-button {
+        background-color: #649fd6;
+        color: white;
+        border: none;
+        padding: 0.3rem 0.8rem;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    .tab-button:hover {
+        background-color: #ffb703;
+    }
+    
+    .active-tab {
+        background-color: #1e9dad !important;
+    }
+    .header, .footer {
+        max-width: fit;
+        margin: 0 auto;
+    }
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;              /* full width */
+        background:rgb(94, 207, 177);
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        padding: 0.5rem 1rem;      /* small padding all around */
+        box-sizing: border-box;   /* important to include padding inside width */
+        }
+
+    .header-left, .header-center, .header-right {
+        flex: 1;
+        text-align: center;
+    }
+
+    .header-left {
+        text-align: left;
+    }
+    .header-right {
+        text-align: right;
+    }
+    #try-again-msg {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #ffb703;
+        max-width: 150px;
+        max-height: 50px;
+    } 
+
+
+
+
+
+    table {
+    padding: 10px;    
+    padding-top: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    }
+    th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid black;
+    }
+    /*tr:nth-child(even){background-color:rgb(255, 250, 250)}*/
+    thead tr {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 2;
+    }
+
+    #hand-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+        
+    }
+
+
+</style>
+</head>
+<body>
+    <div class="background-image"></div>
+    <video id="webcam" autoplay muted playsinline></video>
+
+    <canvas id="hand-canvas" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    "></canvas>
+
+    <!-- Blur overlay -->
+    <div id="blur-overlay" style="
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 98;
+    "></div>
+
+    <!-- Header Bar -->
+    <div class="header">
+        <div class="header-left c7 big-bold">Task Done (4/4): Processing Open-ended Survey 'Word Frequency of the Column Feedback'</div>
+        <div style="position: absolute; right: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 1.2rem;">🔆</span>
+            <input type="range" min="0.1" max="1" step="0.01" value="0.2"
+                id="brightness-slider"
+                style="width: 100px; height: 4px; cursor: pointer;">
+        </div>
+    </div>
+
+    <h2>Merged Table</h2>
+    <h2>Merged Table</h2>
+    <p></p>
+    <p></p>
+    <div style="overflow-y: scroll; display: block; height: calc(100vh - 160px);">
+    <table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Frequency</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>more</td><td>12</td></tr>
+                <tr><td>the</td><td>9</td></tr>
+                <tr><td>to</td><td>8</td></tr>
+                <tr><td>i</td><td>7</td></tr>
+                <tr><td>a</td><td>7</td></tr>
+                <tr><td>enjoying</td><td>7</td></tr>
+                <tr><td>new</td><td>7</td></tr>
+                <tr><td>projects</td><td>7</td></tr>
+                <tr><td>looking</td><td>6</td></tr>
+                <tr><td>forward</td><td>6</td></tr>
+                <tr><td>raise</td><td>6</td></tr>
+                <tr><td>want</td><td>6</td></tr>
+                <tr><td>flexible</td><td>6</td></tr>
+                <tr><td>hours</td><td>6</td></tr>
+                <tr><td>needs</td><td>5</td></tr>
+                <tr><td>better</td><td>5</td></tr>
+                <tr><td>love</td><td>4</td></tr>
+                <tr><td>would</td><td>4</td></tr>
+                <tr><td>could</td><td>4</td></tr>
+                <tr><td>great</td><td>3</td></tr>
+            </tbody>
+        </table>
+    </table>
+    </div>
+    <div style="
+        position: fixed;
+        bottom: 70px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start; 
+        padding-left: 1.5rem;         
+        gap: 1rem;
+        z-index: 15;
+        ">
+        
+    </div>
+    <div class="footer">
+        <a href="{{ url_for('thanks')}}" class="next-button">Next</a>
+        <!--button class="correct-button">Correct</button-->
+    </div>
+    
+</body>
+<script>
+    const video = document.getElementById('webcam');
+
+    // Request access to webcam
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+        video.srcObject = stream;
+    })
+    .catch((err) => {
+        console.error('Webcam error:', err);
+        alert('Could not access webcam. Please check browser settings and permissions.');
+    });
+
+    const brightnessSlider = document.getElementById('brightness-slider');
+    const storedBrightness = localStorage.getItem('webcamBrightness');
+
+    if (storedBrightness) {
+        brightnessSlider.value = storedBrightness;
+        video.style.filter = `brightness(${storedBrightness}) grayscale(1)`;
+    }
+
+    brightnessSlider.addEventListener('input', function () {
+        const brightness = this.value;
+        video.style.filter = `brightness(${brightness}) grayscale(1)`;
+        localStorage.setItem('webcamBrightness', brightness);
+    });
+
+    const videoElement = document.getElementById('webcam');
+    const canvasElement = document.getElementById('hand-canvas');
+    const canvasCtx = canvasElement.getContext('2d');
+
+    function resizeCanvas() {
+        const videoRatio = videoElement.videoWidth / videoElement.videoHeight;
+        const screenRatio = window.innerWidth / window.innerHeight;
+    
+        // Set canvas size to match video resolution
+        canvasElement.width = videoElement.videoWidth;
+        canvasElement.height = videoElement.videoHeight;
+    
+        // Match canvas style to the mirrored webcam
+        canvasElement.style.width = videoElement.style.width;
+        canvasElement.style.height = videoElement.style.height;
+        canvasElement.style.transform = "none";
+    }
+
+    // Initialize MediaPipe Hands
+    const hands = new Hands({
+        locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+    });
+    hands.setOptions({
+        maxNumHands: 2,
+        modelComplexity: 1,
+        minDetectionConfidence: 0.7,
+        minTrackingConfidence: 0.6
+    });
+    hands.onResults(results => {
+        resizeCanvas();
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        canvasCtx.translate(canvasElement.width, 0); // mirror horizontally
+        canvasCtx.scale(-1, 1);
+        
+        if (results.multiHandLandmarks) {
+            for (const landmarks of results.multiHandLandmarks) {
+            drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
+                color: '#749bf9', lineWidth: 1
+            });
+            drawLandmarks(canvasCtx, landmarks, {
+                color: (data) => [4, 8, 12, 16, 20].includes(data.index) ? '#ac115f' : 'rgba(255,255,255,0)', // maroon
+                radius: (data) => [4, 8, 12, 16, 20].includes(data.index) ? 1.5 : 0.2
+                //color: '#FF0000',
+                //radius: (data) => [4, 8, 12, 16, 20].includes(data.index) ? 1.5 : 0.2
+            });
+            }
+        }
+        
+        canvasCtx.restore();
+        console.log("Results:", results);
+        });
+
+    // Webcam stream
+    const camera = new Camera(videoElement, {
+        onFrame: async () => {
+            await hands.send({ image: videoElement });
+        },
+        width: 640,
+        height: 480
+    });
+    camera.start();
+
+    
+</script>
+</html>
