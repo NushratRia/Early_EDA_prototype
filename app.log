@@ -179,3 +179,57 @@
 2025-05-20 17:25:41,873 INFO: 127.0.0.1 - - [20/May/2025 17:25:41] "GET /open2 HTTP/1.1" 200 -
 2025-05-20 17:26:03,231 INFO: 127.0.0.1 - - [20/May/2025 17:26:03] "GET /open2 HTTP/1.1" 200 -
 2025-05-20 17:26:04,307 INFO: 127.0.0.1 - - [20/May/2025 17:26:04] "GET /thanks HTTP/1.1" 200 -
+2025-06-02 16:15:23,685 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://167.96.255.221:5001
+2025-06-02 16:15:23,687 INFO: [33mPress CTRL+C to quit[0m
+2025-06-02 16:15:23,704 INFO:  * Restarting with watchdog (fsevents)
+2025-06-02 16:15:24,178 WARNING:  * Debugger is active!
+2025-06-02 16:15:24,187 INFO:  * Debugger PIN: 152-090-071
+2025-06-02 16:15:33,004 INFO: 127.0.0.1 - - [02/Jun/2025 16:15:33] "GET / HTTP/1.1" 200 -
+2025-06-02 16:15:33,358 INFO: 127.0.0.1 - - [02/Jun/2025 16:15:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-02 16:15:34,380 INFO: 127.0.0.1 - - [02/Jun/2025 16:15:34] "[35m[1mGET /outlier HTTP/1.1[0m" 500 -
+2025-06-02 16:15:34,425 INFO: 127.0.0.1 - - [02/Jun/2025 16:15:34] "GET /outlier?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-06-02 16:15:34,432 INFO: 127.0.0.1 - - [02/Jun/2025 16:15:34] "GET /outlier?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-06-02 16:15:34,463 INFO: 127.0.0.1 - - [02/Jun/2025 16:15:34] "GET /outlier?__debugger__=yes&cmd=resource&f=console.png&s=joF6sERTfE0cVlKRk3hM HTTP/1.1" 200 -
+2025-06-02 16:15:34,480 INFO: 127.0.0.1 - - [02/Jun/2025 16:15:34] "GET /outlier?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-06-02 16:16:16,696 INFO:  * Detected change in '/Users/nushrat/Desktop/HCI_Lab/Project_2/Early_EDA_prototype/app.py', reloading
+2025-06-02 16:16:17,614 INFO:  * Restarting with watchdog (fsevents)
+2025-06-02 16:16:18,503 WARNING:  * Debugger is active!
+2025-06-02 16:16:18,508 INFO:  * Debugger PIN: 152-090-071
+2025-06-02 16:16:20,776 INFO: 127.0.0.1 - - [02/Jun/2025 16:16:20] "GET /outlier HTTP/1.1" 200 -
+2025-06-02 16:17:49,234 INFO: 127.0.0.1 - - [02/Jun/2025 16:17:49] "GET /outlier2 HTTP/1.1" 200 -
+2025-06-02 16:17:51,822 INFO: 127.0.0.1 - - [02/Jun/2025 16:17:51] "GET /top HTTP/1.1" 200 -
+2025-06-02 16:17:54,366 INFO: 127.0.0.1 - - [02/Jun/2025 16:17:54] "GET /top2 HTTP/1.1" 200 -
+2025-06-02 16:17:55,483 INFO: 127.0.0.1 - - [02/Jun/2025 16:17:55] "GET /pivot HTTP/1.1" 200 -
+2025-06-02 16:17:56,660 INFO: 127.0.0.1 - - [02/Jun/2025 16:17:56] "GET /pivot2 HTTP/1.1" 200 -
+2025-06-02 16:17:59,817 INFO: 127.0.0.1 - - [02/Jun/2025 16:17:59] "GET /vis HTTP/1.1" 200 -
+2025-06-02 16:18:00,587 INFO: 127.0.0.1 - - [02/Jun/2025 16:18:00] "GET /vis2 HTTP/1.1" 200 -
+2025-06-02 16:18:01,290 INFO: 127.0.0.1 - - [02/Jun/2025 16:18:01] "GET /thanks HTTP/1.1" 200 -
+2025-06-02 16:19:27,785 INFO: 127.0.0.1 - - [02/Jun/2025 16:19:27] "GET / HTTP/1.1" 200 -
+2025-06-02 16:19:29,135 INFO: 127.0.0.1 - - [02/Jun/2025 16:19:29] "GET /outlier HTTP/1.1" 200 -
+2025-06-02 16:19:32,880 INFO: 127.0.0.1 - - [02/Jun/2025 16:19:32] "GET /outlier2 HTTP/1.1" 200 -
+2025-06-02 16:19:34,196 INFO: 127.0.0.1 - - [02/Jun/2025 16:19:34] "GET /top HTTP/1.1" 200 -
+2025-06-03 10:23:05,852 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.0.81:5001
+2025-06-03 10:23:05,852 INFO: [33mPress CTRL+C to quit[0m
+2025-06-03 10:23:05,871 INFO:  * Restarting with watchdog (fsevents)
+2025-06-03 10:23:06,363 WARNING:  * Debugger is active!
+2025-06-03 10:23:06,369 INFO:  * Debugger PIN: 152-090-071
+2025-06-03 10:27:00,603 INFO: 127.0.0.1 - - [03/Jun/2025 10:27:00] "GET / HTTP/1.1" 200 -
+2025-06-03 10:27:01,954 INFO: 127.0.0.1 - - [03/Jun/2025 10:27:01] "GET /outlier HTTP/1.1" 200 -
+2025-06-03 10:27:10,888 INFO: 127.0.0.1 - - [03/Jun/2025 10:27:10] "GET /outlier2 HTTP/1.1" 200 -
+2025-06-03 10:27:16,166 INFO: 127.0.0.1 - - [03/Jun/2025 10:27:16] "GET /top HTTP/1.1" 200 -
+2025-06-03 10:27:19,795 INFO: 127.0.0.1 - - [03/Jun/2025 10:27:19] "GET /top2 HTTP/1.1" 200 -
+2025-06-03 10:28:27,623 INFO: 127.0.0.1 - - [03/Jun/2025 10:28:27] "GET /top2 HTTP/1.1" 200 -
+2025-06-03 10:28:31,249 INFO: 127.0.0.1 - - [03/Jun/2025 10:28:31] "GET /top HTTP/1.1" 200 -
+2025-06-03 10:28:36,547 INFO: 127.0.0.1 - - [03/Jun/2025 10:28:36] "GET /top2 HTTP/1.1" 200 -
+2025-06-03 10:35:51,230 INFO: 127.0.0.1 - - [03/Jun/2025 10:35:51] "GET /top2 HTTP/1.1" 200 -
+2025-06-03 10:38:15,567 INFO: 127.0.0.1 - - [03/Jun/2025 10:38:15] "GET /top HTTP/1.1" 200 -
+2025-06-03 10:41:34,480 INFO: 127.0.0.1 - - [03/Jun/2025 10:41:34] "GET /pivot HTTP/1.1" 200 -
+2025-06-03 10:41:36,173 INFO: 127.0.0.1 - - [03/Jun/2025 10:41:36] "GET /pivot2 HTTP/1.1" 200 -
+2025-06-03 10:42:04,235 INFO: 127.0.0.1 - - [03/Jun/2025 10:42:04] "GET /vis HTTP/1.1" 200 -
+2025-06-03 10:42:11,273 INFO: 127.0.0.1 - - [03/Jun/2025 10:42:11] "GET /vis HTTP/1.1" 200 -
