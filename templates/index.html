@@ -1,89 +1,210 @@
+<!--DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multimodal EDA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fef6f1; /* soft neutral background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #082f49;
+    }
+
+    .landing-container {
+      text-align: center;
+      max-width: 80%;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #0f3d57; /* bold deep blue */
+      margin-bottom: 40px;
+    }
+
+    .start-button {
+      display: inline-block;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(135deg, #ffb703, #fb8500); /* warm golden-orange blend */
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0px 8px 20px rgba(251, 133, 0, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .start-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 12px 24px rgba(251, 133, 0, 0.35);
+    }
+  </style>
+</head>
+<body>
+  <div class="landing-container">
+    <h1 class="title">Multimodal Interactions for Early EDA Tasks</h1>
+    <a href="/task" class="start-button">Let’s Start</a>
+  </div>
+</body>
+</html-->
+
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multimodal EDA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/11.9.1/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/11.9.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background:rgb(253, 241, 233); /*linear-gradient(to right, #ffcf67, #ffc043);  golden background */
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 1;
+      gap: 16px;
+      padding: 24px;
+    }
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    .icon-grid i {
+      font-size: 26px;
+      opacity: 0.85;
+      justify-self: center;
+      align-self: center;
+    }
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+    /* 🎨 Pantone-inspired icon colors */
+    .c1 { color: #db3069; } /* vivid magenta */
+    .c2 { color: #ec8ca6; } /* soft pink */
+    .c3 { color: #ffc6a5; } /* peach fuzz */
+    .c4 { color: #fb8500; } /* orange */
+    .c5 { color: #5ecfb1; } /* mint green */
+    .c6 { color: #1e9dad; } /* teal */
+    .c7 { color: #0b4f84; } /* navy */
+    .c8 { color: #649fd6; } /* blue */
+
+    .landing {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(20px);
+      padding: 50px 30px;
+      border-radius: 200px;
+      text-align: center;
+      z-index: 10;
+      max-width: 620px;
+      border: 0.000000001px solid #023047;
+    }
+
+    .landing h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #023047;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .start-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 36px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      background-color: #fb8500;
+      border: none;
+      border-radius: 40px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      text-decoration: none;
+    }
+
+    .start-button:hover {
+      background-color: #ffb703;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="icon-grid" id="iconGrid"></div>
+
+  <div class="landing">
+    <h1>Multimodal Interactions<br>for Early EDA Tasks</h1>
+    <a href="/task" class="start-button">Let’s Start</a>
+  </div>
+
+  <script>
+    const icons = [
+      "fa-microphone", "fa-hand-pointer", "fa-sign-language", "fa-computer-mouse",
+      "fa-keyboard", "fa-desktop", "fa-laptop", "fa-volume-up",
+      "fa-pen-nib", "fa-file-lines", "fa-mobile-screen-button", "fa-eye",
+      "fa-magnifying-glass", "fa-camera", "fa-headphones", "fa-comments",
+      "fa-video", "fa-chalkboard", "fa-brain", "fa-lightbulb"
+    ];
+
+    const colorClasses = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
+    const grid = document.getElementById("iconGrid");
+    const total = 96; // 12 x 8 grid
+
+    for (let i = 0; i < total; i++) {
+      const icon = document.createElement("i");
+      const iconName = icons[Math.floor(Math.random() * icons.length)];
+      const colorClass = colorClasses[Math.floor(Math.random() * colorClasses.length)];
+      icon.className = `fas ${iconName} ${colorClass}`;
+      grid.appendChild(icon);
+    }
+
+
+  </script>
+
+  
+  <!--script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyAg_25VDzOJsfqS92n8qx6CmSris-WfSiE",
+      authDomain: "multimodaleda.firebaseapp.com",
+      projectId: "multimodaleda",
+      storageBucket: "multimodaleda.firebasestorage.app",
+      messagingSenderId: "1023213550365",
+      appId: "1:1023213550365:web:33191c174c021838affff4",
+      measurementId: "G-LPPQHE4KK7"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script-->
+</body>
 </html>
