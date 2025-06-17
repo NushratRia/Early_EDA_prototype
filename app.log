@@ -341,3 +341,13 @@
 2025-06-17 16:06:37,061 INFO: 127.0.0.1 - - [17/Jun/2025 16:06:37] "GET / HTTP/1.1" 200 -
 2025-06-17 16:06:37,591 INFO: 127.0.0.1 - - [17/Jun/2025 16:06:37] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
 2025-06-17 16:06:38,408 INFO: 127.0.0.1 - - [17/Jun/2025 16:06:38] "GET /task HTTP/1.1" 200 -
+2025-06-17 16:20:17,422 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.0.81:5001
+2025-06-17 16:20:17,422 INFO: [33mPress CTRL+C to quit[0m
+2025-06-17 16:20:17,431 INFO:  * Restarting with watchdog (fsevents)
+2025-06-17 16:20:17,917 WARNING:  * Debugger is active!
+2025-06-17 16:20:17,923 INFO:  * Debugger PIN: 152-090-071
+2025-06-17 16:20:22,160 INFO: 127.0.0.1 - - [17/Jun/2025 16:20:22] "GET / HTTP/1.1" 200 -
+2025-06-17 16:20:23,398 INFO: 127.0.0.1 - - [17/Jun/2025 16:20:23] "GET /task HTTP/1.1" 200 -
